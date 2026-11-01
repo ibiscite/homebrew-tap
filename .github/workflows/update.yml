@@ -1,0 +1,48 @@
+name: Update
+
+# Once a day, and on demand, point the formula at the newest stable Ibis release.
+# It changes only after the new formula installs and passes its test.
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  formula:
+    runs-on: macos-15
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: Homebrew/actions/setup-homebrew@c262868c096d909fc278daa87ed9772967331ea3 # main
+      - name: Write the formula for the newest release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: .github/scripts/update-formula.sh
+      - name: Install, test and publish
+        run: |
+          if git diff --quiet; then
+            echo "Already on the newest release."
+            exit 0
+          fi
+          # Test the new formula through the tap Homebrew uses, wherever it lives.
+          tap="$(brew --repository ibiscite/tap)"
+          if [ "$(cd "$tap" && pwd -P)" != "$(pwd -P)" ]; then
+            cp Formula/ibis.rb "$tap/Formula/ibis.rb"
+          fi
+          brew style ibiscite/tap
+          brew reinstall --formula ibiscite/tap/ibis
+          brew test ibiscite/tap/ibis
+          version="$(brew info --json=v2 ibiscite/tap/ibis | jq -r '.formulae[0].versions.stable')"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "ibis ${version}"
+          git push origin HEAD:main

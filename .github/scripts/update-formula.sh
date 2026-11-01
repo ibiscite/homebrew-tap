@@ -41,7 +41,7 @@ class Ibis < Formula
   license "AGPL-3.0-or-later"
 
   livecheck do
-    url "https://github.com/${repo}"
+    url :stable
     strategy :github_latest
   end
 

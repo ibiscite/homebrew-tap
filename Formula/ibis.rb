@@ -6,7 +6,7 @@ class Ibis < Formula
   license "AGPL-3.0-or-later"
 
   livecheck do
-    url "https://github.com/ibiscite/ibis"
+    url :stable
     strategy :github_latest
   end
 

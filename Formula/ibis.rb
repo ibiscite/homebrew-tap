@@ -2,7 +2,6 @@
 class Ibis < Formula
   desc "Search your reference library and cite from a terminal or an AI agent"
   homepage "https://ibiscite.org"
-  version "0.2.6"
   license "AGPL-3.0-or-later"
 
   livecheck do

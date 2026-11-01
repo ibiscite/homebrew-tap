@@ -37,7 +37,6 @@ cat > "$(dirname "$0")/../../Formula/ibis.rb" <<FORMULA
 class Ibis < Formula
   desc "Search your reference library and cite from a terminal or an AI agent"
   homepage "https://ibiscite.org"
-  version "${version}"
   license "AGPL-3.0-or-later"
 
   livecheck do

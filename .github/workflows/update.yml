@@ -28,6 +28,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: .github/scripts/update-formula.sh
       - name: Install, test and publish
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           if git diff --quiet; then
             echo "Already on the newest release."
@@ -45,4 +47,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -am "ibis ${version}"
-          git push origin HEAD:main
+          # setup-homebrew replaces the checkout's git configuration, so push with the token explicitly.
+          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main

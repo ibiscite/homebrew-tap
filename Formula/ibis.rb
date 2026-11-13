@@ -11,19 +11,19 @@ class Ibis < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/ibiscite/ibis/releases/download/v0.3.3/ibis-macOS-Apple-silicon.tar.gz"
-      sha256 "c47117d3c1e36991317cefc219b812e9978c57a95fe6464cee3d5e288d0af92a"
+      url "https://github.com/ibiscite/ibis/releases/download/v0.3.6/ibis-macOS-Apple-silicon.tar.gz"
+      sha256 "8d11f63fd94f81b7e5425d592a11f1158d60cd5c5a48ffad3c41f8e13f7ee968"
     end
     on_intel do
-      url "https://github.com/ibiscite/ibis/releases/download/v0.3.3/ibis-macOS-Intel.tar.gz"
-      sha256 "278f92d5a5696242862c25d00a8324ba78445c16b1ba2e4b28f0f89c18d0b235"
+      url "https://github.com/ibiscite/ibis/releases/download/v0.3.6/ibis-macOS-Intel.tar.gz"
+      sha256 "9e76f546d01093b48e9795e0fd5a2c27413770c102fd6e51080764d37a531c0b"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/ibiscite/ibis/releases/download/v0.3.3/ibis-Linux.tar.gz"
-      sha256 "3aa4e50bb54078478e83a62263444a830be1f8a84657850257fd62b04bc80497"
+      url "https://github.com/ibiscite/ibis/releases/download/v0.3.6/ibis-Linux.tar.gz"
+      sha256 "e76726c3747c29ab4b9b0f58cf27714a46f6717d655eed087c1fa81d5611c4f7"
     end
   end
 
